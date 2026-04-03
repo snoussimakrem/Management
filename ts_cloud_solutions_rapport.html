@@ -1,0 +1,733 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cloud-blue: #1B4FD8;
+    --cloud-blue-light: #EBF0FF;
+    --cloud-teal: #0E9F7E;
+    --cloud-teal-light: #E6FAF5;
+    --cloud-amber: #D97706;
+    --cloud-amber-light: #FEF3C7;
+    --cloud-red: #DC2626;
+    --cloud-red-light: #FEE2E2;
+    --cloud-purple: #7C3AED;
+    --cloud-purple-light: #EDE9FE;
+    --ink: #0F172A;
+    --ink-mid: #475569;
+    --ink-light: #94A3B8;
+    --surface: #F8FAFC;
+    --border: rgba(15,23,42,0.08);
+    --white: #FFFFFF;
+  }
+
+  body { font-family: 'DM Sans', sans-serif; color: var(--ink); background: var(--surface); }
+
+  .report {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 0 60px;
+    background: var(--surface);
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0A1628 0%, #1B2E55 60%, #1B4FD8 100%);
+    padding: 56px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(27,79,216,0.3);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 30%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(14,159,126,0.15);
+  }
+  .hero-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #60A5FA;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .hero h1 span { color: #60A5FA; }
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 36px;
+    position: relative;
+  }
+  .hero-kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    position: relative;
+  }
+  .hero-kpi {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .hero-kpi-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .hero-kpi-value {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1;
+  }
+  .hero-kpi-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 4px;
+  }
+
+  /* SECTIONS */
+  .section { padding: 40px 48px; }
+  .section + .section { border-top: 1px solid var(--border); }
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cloud-blue);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  /* METRIC CARDS */
+  .metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; }
+  .metric-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .metric-label { font-size: 12px; color: var(--ink-mid); margin-bottom: 6px; }
+  .metric-value { font-size: 28px; font-weight: 600; line-height: 1; }
+  .metric-hint { font-size: 12px; color: var(--ink-light); margin-top: 4px; }
+  .metric-blue .metric-value { color: var(--cloud-blue); }
+  .metric-teal .metric-value { color: var(--cloud-teal); }
+  .metric-amber .metric-value { color: var(--cloud-amber); }
+
+  /* CHARTS */
+  .chart-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .chart-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+  .chart-sub { font-size: 12px; color: var(--ink-light); margin-bottom: 18px; }
+
+  .chart-legend {
+    display: flex; flex-wrap: wrap; gap: 14px;
+    margin-bottom: 14px; font-size: 12px; color: var(--ink-mid);
+  }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  /* GRID CHARTS */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  /* SEGMENT TABLE */
+  .segment-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .segment-table th {
+    text-align: left; font-size: 11px; font-weight: 600; color: var(--ink-light);
+    text-transform: uppercase; letter-spacing: 0.07em;
+    padding: 10px 14px; border-bottom: 1px solid var(--border);
+  }
+  .segment-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .segment-table tr:last-child td { border-bottom: none; }
+  .segment-badge {
+    display: inline-block; padding: 3px 10px; border-radius: 20px;
+    font-size: 11px; font-weight: 500;
+  }
+  .badge-blue { background: var(--cloud-blue-light); color: var(--cloud-blue); }
+  .badge-teal { background: var(--cloud-teal-light); color: var(--cloud-teal); }
+  .badge-amber { background: var(--cloud-amber-light); color: var(--cloud-amber); }
+  .badge-purple { background: var(--cloud-purple-light); color: var(--cloud-purple); }
+
+  /* COMPETITOR TABLE */
+  .comp-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .comp-table th {
+    text-align: left; font-size: 11px; font-weight: 600; color: var(--ink-light);
+    text-transform: uppercase; letter-spacing: 0.07em;
+    padding: 10px 14px; border-bottom: 1px solid var(--border); background: var(--surface);
+  }
+  .comp-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .check { color: var(--cloud-teal); font-weight: 600; }
+  .cross { color: var(--cloud-red); }
+
+  /* TEAM */
+  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .team-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px;
+  }
+  .team-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 600; margin-bottom: 12px;
+  }
+  .avatar-blue { background: var(--cloud-blue-light); color: var(--cloud-blue); }
+  .avatar-teal { background: var(--cloud-teal-light); color: var(--cloud-teal); }
+  .avatar-amber { background: var(--cloud-amber-light); color: var(--cloud-amber); }
+  .team-name { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+  .team-role { font-size: 12px; color: var(--cloud-blue); margin-bottom: 8px; }
+  .team-desc { font-size: 12px; color: var(--ink-mid); line-height: 1.5; }
+
+  /* ROADMAP */
+  .roadmap { display: flex; flex-direction: column; gap: 0; }
+  .roadmap-item {
+    display: grid; grid-template-columns: 120px 1fr;
+    gap: 0; position: relative;
+  }
+  .roadmap-left { padding: 0 24px 32px 0; text-align: right; }
+  .roadmap-period { font-size: 11px; font-weight: 600; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.07em; padding-top: 2px; }
+  .roadmap-right { padding: 0 0 32px 24px; border-left: 2px solid var(--border); position: relative; }
+  .roadmap-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    position: absolute; left: -7px; top: 2px;
+    border: 2px solid var(--white);
+  }
+  .roadmap-item:last-child .roadmap-right { border-left-color: transparent; }
+  .roadmap-phase { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+  .roadmap-goals { font-size: 13px; color: var(--ink-mid); line-height: 1.6; }
+
+  /* RISK */
+  .risk-grid { display: flex; flex-direction: column; gap: 12px; }
+  .risk-item {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px; display: flex; align-items: flex-start; gap: 14px;
+  }
+  .risk-icon {
+    width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 16px;
+  }
+  .risk-title { font-size: 13px; font-weight: 500; margin-bottom: 3px; }
+  .risk-mitigation { font-size: 12px; color: var(--ink-mid); line-height: 1.5; }
+  .risk-badge {
+    font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em;
+    padding: 2px 8px; border-radius: 20px; margin-left: auto; flex-shrink: 0; align-self: flex-start; margin-top: 2px;
+  }
+
+  /* FUNDING */
+  .funding-bar { margin: 6px 0 4px; height: 8px; border-radius: 4px; background: var(--cloud-blue-light); overflow: hidden; }
+  .funding-fill { height: 100%; border-radius: 4px; }
+
+  /* FOOTER */
+  .footer {
+    background: #0A1628;
+    padding: 32px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-brand { font-family: 'DM Serif Display', serif; font-size: 20px; color: #fff; }
+  .footer-contact { font-size: 12px; color: rgba(255,255,255,0.5); text-align: right; line-height: 1.8; }
+
+  @media (max-width: 640px) {
+    .hero { padding: 32px 24px; }
+    .hero h1 { font-size: 28px; }
+    .hero-kpis { grid-template-columns: repeat(2,1fr); }
+    .section { padding: 28px 24px; }
+    .metric-grid, .two-col, .team-grid { grid-template-columns: 1fr; }
+    .footer { flex-direction: column; gap: 16px; text-align: center; }
+    .footer-contact { text-align: center; }
+  }
+</style>
+
+<div class="report">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">Business Plan 2025–2027</div>
+    <h1>TS <span>Cloud</span> Solutions</h1>
+    <p class="hero-sub">Infrastructure cloud souveraine pour l'Afrique francophone</p>
+    <div class="hero-kpis">
+      <div class="hero-kpi">
+        <div class="hero-kpi-label">CA Année 1</div>
+        <div class="hero-kpi-value">470K€</div>
+        <div class="hero-kpi-sub">Projection cible</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="hero-kpi-label">Marge brute</div>
+        <div class="hero-kpi-value">58%</div>
+        <div class="hero-kpi-sub">Après coûts infra</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="hero-kpi-label">Seuil rentabilité</div>
+        <div class="hero-kpi-value">Mois 14</div>
+        <div class="hero-kpi-sub">180 clients actifs</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="hero-kpi-label">Financement</div>
+        <div class="hero-kpi-value">200K€</div>
+        <div class="hero-kpi-sub">Recherché</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: FINANCIALS -->
+  <div class="section">
+    <div class="section-label">Plan Financier</div>
+    <div class="section-title">Projections & Revenus</div>
+
+    <div class="metric-grid">
+      <div class="metric-card metric-blue">
+        <div class="metric-label">Revenu Total Année 1</div>
+        <div class="metric-value">470 000 €</div>
+        <div class="metric-hint">150 clients · ARPU 250€/mois</div>
+      </div>
+      <div class="metric-card metric-teal">
+        <div class="metric-label">EBITDA Année 1</div>
+        <div class="metric-value">+124K€</div>
+        <div class="metric-hint">Positif dès le mois 4</div>
+      </div>
+      <div class="metric-card metric-amber">
+        <div class="metric-label">Taux de rétention</div>
+        <div class="metric-value">92%</div>
+        <div class="metric-hint">Support local différenciant</div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Évolution du Revenu & EBITDA par Trimestre (€)</div>
+      <div class="chart-sub">Compte de résultat prévisionnel — Année 1</div>
+      <div class="chart-legend">
+        <span><span class="legend-dot" style="background:#1B4FD8;"></span>Revenus</span>
+        <span><span class="legend-dot" style="background:#0E9F7E;"></span>Coûts datacenter</span>
+        <span><span class="legend-dot" style="background:#D97706;"></span>Salaires</span>
+        <span><span class="legend-dot" style="background:#7C3AED;"></span>EBITDA</span>
+      </div>
+      <div style="position:relative;width:100%;height:280px;">
+        <canvas id="chart-revenue"></canvas>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="chart-card" style="margin-bottom:0;">
+        <div class="chart-title">Allocation du Financement (200K€)</div>
+        <div class="chart-sub">Utilisation des fonds levés</div>
+        <div class="chart-legend">
+          <span><span class="legend-dot" style="background:#1B4FD8;"></span>Infrastructure 40%</span>
+          <span><span class="legend-dot" style="background:#0E9F7E;"></span>Marketing 35%</span>
+          <span><span class="legend-dot" style="background:#D97706;"></span>Trésorerie 25%</span>
+        </div>
+        <div style="position:relative;width:100%;height:200px;">
+          <canvas id="chart-funding"></canvas>
+        </div>
+      </div>
+      <div class="chart-card" style="margin-bottom:0;">
+        <div class="chart-title">Budget Marketing Mensuel</div>
+        <div class="chart-sub">Répartition par canal d'acquisition</div>
+        <div style="position:relative;width:100%;height:230px;">
+          <canvas id="chart-marketing"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: MARCHE -->
+  <div class="section">
+    <div class="section-label">Analyse du Marché</div>
+    <div class="section-title">Segments & Opportunités</div>
+
+    <div class="chart-card">
+      <div class="chart-title">Taille des segments cibles</div>
+      <div class="chart-sub">Nombre d'entreprises/organisations par segment en Afrique du Nord</div>
+      <div style="position:relative;width:100%;height:200px;">
+        <canvas id="chart-segments"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-card" style="margin-top:20px;">
+      <div class="chart-title">Segments Cibles — Détail</div>
+      <div class="chart-sub">Profil et besoins de chaque segment</div>
+      <table class="segment-table">
+        <thead>
+          <tr>
+            <th>Segment</th>
+            <th>Description</th>
+            <th>Taille estimée</th>
+            <th>Profil</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="segment-badge badge-blue">Startups</span></td>
+            <td>MVP, scaling, CI/CD — itération rapide</td>
+            <td><strong>300+</strong> en Tunisie</td>
+            <td>Lean, agilité</td>
+          </tr>
+          <tr>
+            <td><span class="segment-badge badge-teal">PME</span></td>
+            <td>E-commerce, hébergement, backup logistique</td>
+            <td><strong>10 000+</strong></td>
+            <td>Retail, supply</td>
+          </tr>
+          <tr>
+            <td><span class="segment-badge badge-amber">Agences Dev</span></td>
+            <td>Hébergement multi-tenant, white-label, revente</td>
+            <td><strong>150+</strong></td>
+            <td>Revendeurs</td>
+          </tr>
+          <tr>
+            <td><span class="segment-badge badge-purple">Institutions</span></td>
+            <td>Cloud privé, conformité locale, souveraineté</td>
+            <td><strong>50+</strong></td>
+            <td>Conformité</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Competitor analysis -->
+    <div class="chart-card" style="margin-top:20px;">
+      <div class="chart-title">Analyse Concurrentielle</div>
+      <div class="chart-sub">TS Cloud vs. principaux acteurs du marché</div>
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Concurrent</th>
+            <th>Prix local</th>
+            <th>Support FR/AR</th>
+            <th>Présence Afrique</th>
+            <th>Simplicité</th>
+            <th>Migration gratuite</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#EBF0FF;">
+            <td><strong>TS Cloud Solutions</strong></td>
+            <td class="check">✓</td>
+            <td class="check">✓</td>
+            <td class="check">✓</td>
+            <td class="check">✓</td>
+            <td class="check">✓</td>
+          </tr>
+          <tr>
+            <td>AWS / Azure / GCP</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+          </tr>
+          <tr>
+            <td>OVH (France)</td>
+            <td style="color:#D97706;">~</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td style="color:#D97706;">~</td>
+            <td class="cross">✗</td>
+          </tr>
+          <tr>
+            <td>Google Cloud</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION: OFFRES -->
+  <div class="section">
+    <div class="section-label">Offre de Services</div>
+    <div class="section-title">Catalogue & Tarification</div>
+    <div class="two-col">
+      <div class="chart-card" style="margin-bottom:0;">
+        <div class="chart-title">IaaS — Machines Virtuelles</div>
+        <div class="chart-sub">Tarifs de référence mensuels</div>
+        <div style="position:relative;width:100%;height:200px;">
+          <canvas id="chart-pricing"></canvas>
+        </div>
+      </div>
+      <div class="chart-card" style="margin-bottom:0;">
+        <div class="chart-title">Mix de Revenus Estimé</div>
+        <div class="chart-sub">Répartition par ligne de service</div>
+        <div class="chart-legend">
+          <span><span class="legend-dot" style="background:#1B4FD8;"></span>IaaS 45%</span>
+          <span><span class="legend-dot" style="background:#0E9F7E;"></span>PaaS 25%</span>
+          <span><span class="legend-dot" style="background:#D97706;"></span>Sécurité 15%</span>
+          <span><span class="legend-dot" style="background:#7C3AED;"></span>Data/IA 10%</span>
+          <span><span class="legend-dot" style="background:#DC2626;"></span>Support 5%</span>
+        </div>
+        <div style="position:relative;width:100%;height:180px;">
+          <canvas id="chart-mix"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: TEAM -->
+  <div class="section">
+    <div class="section-label">Équipe Fondatrice</div>
+    <div class="section-title">Des profils de référence</div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar avatar-blue">AB</div>
+        <div class="team-name">Ahmed B.</div>
+        <div class="team-role">CEO &amp; Co-fondateur</div>
+        <div class="team-desc">12 ans d'expérience cloud — Microsoft, OVH. MBA. Expert stratégie B2B Afrique.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar avatar-teal">SM</div>
+        <div class="team-name">Sarra M.</div>
+        <div class="team-role">CTO &amp; Co-fondatrice</div>
+        <div class="team-desc">8 ans DevOps — AWS, GCP. Ancienne lead tech chez Vermeg. Kubernetes &amp; sécurité.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar avatar-amber">NK</div>
+        <div class="team-name">Noureddine K.</div>
+        <div class="team-role">Directeur Commercial</div>
+        <div class="team-desc">10 ans commercial B2B logiciel — Sage, Oracle. Réseau PME Afrique du Nord.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: ROADMAP -->
+  <div class="section">
+    <div class="section-label">Feuille de Route</div>
+    <div class="section-title">18 mois de déploiement</div>
+    <div class="roadmap">
+      <div class="roadmap-item">
+        <div class="roadmap-left"><div class="roadmap-period">Mois 1–3</div></div>
+        <div class="roadmap-right">
+          <div class="roadmap-dot" style="background:#1B4FD8;"></div>
+          <div class="roadmap-phase">MVP &amp; Bêta privée</div>
+          <div class="roadmap-goals">Lancement VMs, stockage, 10 clients bêta — Support chat — Infrastructure Kubernetes opérationnelle</div>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-left"><div class="roadmap-period">Mois 4–6</div></div>
+        <div class="roadmap-right">
+          <div class="roadmap-dot" style="background:#0E9F7E;"></div>
+          <div class="roadmap-phase">Lancement Public</div>
+          <div class="roadmap-goals">Offre –10%, partenariat Flat6Labs / The Dot — EBITDA positif — PaaS 1-clic disponible</div>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-left"><div class="roadmap-period">Mois 7–12</div></div>
+        <div class="roadmap-right">
+          <div class="roadmap-dot" style="background:#D97706;"></div>
+          <div class="roadmap-phase">Croissance &amp; Conformité</div>
+          <div class="roadmap-goals">Certification ISO 27001 — API publique — Ouverture région Maroc — 150 clients actifs</div>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-left"><div class="roadmap-period">Mois 13–18</div></div>
+        <div class="roadmap-right">
+          <div class="roadmap-dot" style="background:#7C3AED;"></div>
+          <div class="roadmap-phase">Série A &amp; Expansion</div>
+          <div class="roadmap-goals">Levée de fonds Série A (1M€) — Ouverture Côte d'Ivoire — 300+ clients</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: RISKS -->
+  <div class="section">
+    <div class="section-label">Gestion des Risques</div>
+    <div class="section-title">Risques &amp; Mitigation</div>
+    <div class="risk-grid">
+      <div class="risk-item">
+        <div class="risk-icon" style="background:#EBF0FF; font-size:18px;">⚡</div>
+        <div style="flex:1;">
+          <div class="risk-title">Concurrence des hyperscalers</div>
+          <div class="risk-mitigation">Positionnement prix local, support humain FR/AR, migration gratuite, formation incluse.</div>
+        </div>
+        <span class="risk-badge" style="background:#FEF3C7;color:#D97706;">Moyen</span>
+      </div>
+      <div class="risk-item">
+        <div class="risk-icon" style="background:#FEE2E2; font-size:18px;">🔒</div>
+        <div style="flex:1;">
+          <div class="risk-title">Panne technique ou faille sécurité</div>
+          <div class="risk-mitigation">Redondance datacenter, backups quotidiens 30j, audits réguliers, SLA 99,9% avec compensation.</div>
+        </div>
+        <span class="risk-badge" style="background:#DCFCE7;color:#15803D;">Faible</span>
+      </div>
+      <div class="risk-item">
+        <div class="risk-icon" style="background:#FEF3C7; font-size:18px;">📈</div>
+        <div style="flex:1;">
+          <div class="risk-title">Adoption lente des PME</div>
+          <div class="risk-mitigation">Offre –10% 3 mois, formation gratuite pour startups, cas clients et témoignages partenaires incubateurs.</div>
+        </div>
+        <span class="risk-badge" style="background:#FEF3C7;color:#D97706;">Moyen</span>
+      </div>
+      <div class="risk-item">
+        <div class="risk-icon" style="background:#EDE9FE; font-size:18px;">💱</div>
+        <div style="flex:1;">
+          <div class="risk-title">Volatilité des devises / inflation</div>
+          <div class="risk-mitigation">Facturation en euros, stratégie de hedging partielle, contrats annuels pour la visibilité.</div>
+        </div>
+        <span class="risk-badge" style="background:#DCFCE7;color:#15803D;">Faible</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-brand">TS Cloud Solutions</div>
+    <div class="footer-contact">
+      hello@tscloud.tn &nbsp;|&nbsp; +216 70 000 000<br>
+      www.tscloud.tn &nbsp;|&nbsp; Tunis, Tunisie
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.color = '#94A3B8';
+
+const bgs = {
+  blue: '#1B4FD8', teal: '#0E9F7E', amber: '#D97706',
+  purple: '#7C3AED', red: '#DC2626', gray: '#94A3B8'
+};
+
+new Chart(document.getElementById('chart-revenue'), {
+  type: 'bar',
+  data: {
+    labels: ['Mois 1–3','Mois 4–6','Mois 7–12'],
+    datasets: [
+      { label: 'Revenus', data: [30000, 90000, 350000], backgroundColor: '#1B4FD8', borderRadius: 4, order: 1 },
+      { label: 'Coûts datacenter', data: [12000, 30000, 110000], backgroundColor: '#0E9F7E', borderRadius: 4, order: 2 },
+      { label: 'Salaires', data: [25000, 25000, 80000], backgroundColor: '#D97706', borderRadius: 4, order: 3 },
+      {
+        label: 'EBITDA', data: [-16000, 23000, 117000],
+        type: 'line', borderColor: '#7C3AED', backgroundColor: 'rgba(124,58,237,0.08)',
+        pointBackgroundColor: '#7C3AED', borderWidth: 2.5, tension: 0.35, fill: true, order: 0
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false }, ticks: { color: '#94A3B8' } },
+      y: {
+        grid: { color: 'rgba(15,23,42,0.06)' },
+        ticks: {
+          color: '#94A3B8',
+          callback: v => (v >= 0 ? '' : '-') + '€' + Math.abs(v/1000) + 'K'
+        }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('chart-funding'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Infrastructure', 'Marketing & Sales', 'Trésorerie'],
+    datasets: [{ data: [80000, 70000, 50000], backgroundColor: ['#1B4FD8','#0E9F7E','#D97706'], borderWidth: 0, hoverOffset: 6 }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    cutout: '65%',
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' €' + c.raw.toLocaleString() } } }
+  }
+});
+
+new Chart(document.getElementById('chart-marketing'), {
+  type: 'bar',
+  data: {
+    labels: ['SEO / Blog','Google Ads','LinkedIn/FB','Partenariats','Parrainage'],
+    datasets: [{ data: [500, 800, 600, 300, 200], backgroundColor: ['#1B4FD8','#0E9F7E','#D97706','#7C3AED','#DC2626'], borderRadius: 6 }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' €' + c.raw + '/mois' } } },
+    scales: {
+      x: { grid: { color: 'rgba(15,23,42,0.05)' }, ticks: { color: '#94A3B8', callback: v => '€'+v } },
+      y: { grid: { display: false }, ticks: { color: '#475569', font: { size: 11 } } }
+    }
+  }
+});
+
+new Chart(document.getElementById('chart-segments'), {
+  type: 'bar',
+  data: {
+    labels: ['PME','Startups','Agences Dev','Institutions'],
+    datasets: [{ data: [10000, 300, 150, 50], backgroundColor: ['#0E9F7E','#1B4FD8','#D97706','#7C3AED'], borderRadius: 6 }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false }, ticks: { color: '#475569' } },
+      y: { grid: { color: 'rgba(15,23,42,0.05)' }, ticks: { color: '#94A3B8', callback: v => v >= 1000 ? (v/1000)+'K' : v } }
+    }
+  }
+});
+
+new Chart(document.getElementById('chart-pricing'), {
+  type: 'bar',
+  data: {
+    labels: ['VM Standard\n2vCPU 4GB', 'VM Medium\n4vCPU 16GB', 'VM Haute Perf\n8vCPU 32GB', 'PaaS\nDéploiement', 'Sécurité\n(WAF+DDoS)'],
+    datasets: [{ data: [15, 40, 80, 9, 49], backgroundColor: ['#1B4FD8','#1B4FD8','#1B4FD8','#0E9F7E','#DC2626'], borderRadius: 6 }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' €' + c.raw + '/mois' } } },
+    scales: {
+      x: { grid: { display: false }, ticks: { color: '#475569', font: { size: 10 } } },
+      y: { grid: { color: 'rgba(15,23,42,0.05)' }, ticks: { color: '#94A3B8', callback: v => '€'+v } }
+    }
+  }
+});
+
+new Chart(document.getElementById('chart-mix'), {
+  type: 'doughnut',
+  data: {
+    labels: ['IaaS','PaaS','Cybersécurité','Data & IA','Support'],
+    datasets: [{ data: [45, 25, 15, 10, 5], backgroundColor: ['#1B4FD8','#0E9F7E','#D97706','#7C3AED','#DC2626'], borderWidth: 0, hoverOffset: 6 }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    cutout: '60%',
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' ' + c.label + ': ' + c.raw + '%' } } }
+  }
+});
+</script>

@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TS Cloud Solutions | Scalable Cloud & IT Infrastructure</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue: #3B3BEE;
+      --black: #0D0D0D;
+      --white: #F5F5F0;
+      --cream: #EDE8DF;
+      --red: #E63022;
+      --yellow: #F5C842;
+      --green: #1D5C3A;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    /* ── TOP PROMO BAR ── */
+    .promo-bar {
+      background: var(--black);
+      color: white;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 24px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .promo-bar span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .promo-bar .divider {
+      width: 1px;
+      height: 14px;
+      background: #444;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      background: var(--blue);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      height: 72px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    .nav-hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 28px;
+      height: 2.5px;
+      background: white;
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: white;
+      letter-spacing: 3px;
+      line-height: 1;
+      text-decoration: none;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-actions a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+    .cart-badge {
+      position: relative;
+    }
+    .cart-badge .badge {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background: white;
+      color: var(--blue);
+      font-size: 0.55rem;
+      font-weight: 700;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── SCROLLING TICKER ── */
+    .ticker-wrap {
+      background: var(--red);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 10px 0;
+    }
+    .ticker-track {
+      display: inline-block;
+      animation: ticker 18s linear infinite;
+    }
+    .ticker-track span {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      color: white;
+      padding: 0 24px;
+    }
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── HERO SECTION ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 580px;
+      background: var(--cream);
+    }
+    .hero-left {
+      padding: 60px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 18px;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 0.92;
+      letter-spacing: 2px;
+      color: var(--black);
+      margin-bottom: 18px;
+    }
+    .hero-title .highlight {
+      background: var(--blue);
+      color: white;
+      display: inline-block;
+      padding: 2px 14px 4px;
+      text-decoration: underline;
+    }
+    .hero-body {
+      font-size: 0.95rem;
+      font-weight: 400;
+      line-height: 1.7;
+      color: #333;
+      max-width: 420px;
+      margin-bottom: 32px;
+    }
+    .btn-hero {
+      background: var(--black);
+      color: white;
+      display: inline-block;
+      padding: 15px 36px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      align-self: flex-start;
+    }
+    .btn-hero:hover {
+      background: var(--blue);
+      transform: translateY(-2px);
+    }
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+    }
+    .poster-gallery-preview {
+      display: flex;
+      height: 100%;
+      align-items: stretch;
+    }
+    .poster-card-hero {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 12px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+      transition: flex 0.3s ease;
+    }
+    .poster-card-hero:hover { flex: 1.4; }
+    .poster-card-hero .icon { font-size: 2.8rem; margin-bottom: 14px; }
+    .poster-card-hero .label { color: white; text-align: center; line-height: 1.1; }
+    .poster-card-hero .sub { font-family: 'DM Sans', sans-serif; font-size: 0.65rem; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; margin-top: 6px; }
+
+    .p1 { background: #1D5C3A; }
+    .p2 { background: #1E1E6E; }
+    .p3 { background: #B8320A; }
+    .p4 { background: #2C2C2C; }
+
+    /* ── HORIZONTAL POSTER SCROLL ── */
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 48px 40px 20px;
+    }
+    .section-head h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.4rem;
+      letter-spacing: 2px;
+    }
+    .section-head a {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      border-bottom: 2px solid var(--black);
+    }
+
+    .poster-scroll-wrap {
+      overflow-x: auto;
+      padding: 0 40px 40px;
+      scrollbar-width: none;
+    }
+    .poster-scroll-wrap::-webkit-scrollbar { display: none; }
+    .poster-scroll-row {
+      display: flex;
+      gap: 16px;
+      width: max-content;
+    }
+
+    .poster {
+      width: 200px;
+      height: 270px;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .poster:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+
+    .poster-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+    }
+
+    /* Individual poster styles */
+    .poster-cloud { background: #E8F4FD; border: 2px solid #BDD7EE; }
+    .poster-cloud .ptitle { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; line-height: 0.9; color: #0D3B6B; letter-spacing: 2px; text-align: center; }
+    .poster-cloud .picon { font-size: 3.2rem; color: #1E6FB5; margin-bottom: 10px; }
+    .poster-cloud .psub { font-size: 0.6rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #0D3B6B; margin-top: 8px; }
+
+    .poster-security { background: #1A1A1A; }
+    .poster-security .ptitle { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: #00FF88; letter-spacing: 3px; text-align: center; line-height: 0.95; }
+    .poster-security .picon { font-size: 3rem; color: #00FF88; margin-bottom: 12px; }
+    .poster-security .psub { font-size: 0.6rem; letter-spacing: 2px; color: #555; text-transform: uppercase; margin-top: 8px; }
+
+    .poster-data { background: #FFF3CD; border: 3px solid #F5C842; }
+    .poster-data .ptitle { font-family: 'Bebas Neue', sans-serif; font-size: 2.6rem; color: var(--black); letter-spacing: 1px; line-height: 0.9; text-align: center; }
+    .poster-data .picon { font-size: 3rem; color: #D4A017; margin-bottom: 10px; }
+    .poster-data .psub { font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #7A5C00; margin-top: 8px; }
+
+    .poster-hosting { background: #F0F4FF; border: 2px solid #C5D0FF; }
+    .poster-hosting .ptitle { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: #2226CC; letter-spacing: 1px; line-height: 0.9; text-align: center; }
+    .poster-hosting .picon { font-size: 3rem; color: #4449EE; margin-bottom: 10px; }
+    .poster-hosting .psub { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: #2226CC; margin-top: 8px; font-weight: 600; }
+
+    .poster-devops { background: #1D5C3A; }
+    .poster-devops .ptitle { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: #B8F5C2; letter-spacing: 1px; line-height: 0.9; text-align: center; }
+    .poster-devops .picon { font-size: 3rem; color: #60D97A; margin-bottom: 10px; }
+    .poster-devops .psub { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: #80E896; margin-top: 8px; }
+
+    .poster-ai { background: #2D0A4E; }
+    .poster-ai .ptitle { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: #E8B4FF; letter-spacing: 1px; line-height: 0.9; text-align: center; }
+    .poster-ai .picon { font-size: 3rem; color: #CC77FF; margin-bottom: 10px; }
+    .poster-ai .psub { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: #A855D8; margin-top: 8px; }
+
+    .poster-supra { background: #FFF0EC; border: 3px solid var(--red); }
+    .poster-supra .ptitle { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--red); letter-spacing: 1px; line-height: 0.9; text-align: center; }
+    .poster-supra .picon { font-size: 3rem; color: var(--red); margin-bottom: 10px; }
+    .poster-supra .psub { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: #7A1A0E; margin-top: 8px; font-weight: 600; }
+
+    .poster-multi { background: #E8F9EE; border: 2px dashed #4AA868; }
+    .poster-multi .ptitle { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: #1D5C3A; letter-spacing: 1px; line-height: 0.9; text-align: center; }
+    .poster-multi .picon { font-size: 3rem; color: #2D8C50; margin-bottom: 10px; }
+    .poster-multi .psub { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: #2D8C50; margin-top: 8px; }
+
+    .poster-label-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      background: rgba(0,0,0,0.08);
+      padding: 10px 14px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: inherit;
+    }
+
+    /* ── STATS ROW ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--black);
+      margin: 0;
+    }
+    .stat-item {
+      padding: 40px 32px;
+      border-right: 1px solid #222;
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: white;
+      letter-spacing: 2px;
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    /* ── TRENDING SECTION ── */
+    .trending {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin: 2px 0;
+    }
+    .trend-card {
+      padding: 48px 44px;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .trend-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      transition: background 0.3s;
+    }
+    .trend-card:hover::before { background: rgba(0,0,0,0.12); }
+
+    .tc-1 { background: #1E1E6E; }
+    .tc-2 { background: var(--cream); border: 1px solid #ddd; }
+    .tc-3 { background: #1D5C3A; }
+
+    .trend-eyebrow {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .trend-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.2rem;
+      letter-spacing: 2px;
+      line-height: 0.9;
+      margin-bottom: 12px;
+    }
+    .trend-body {
+      font-size: 0.85rem;
+      line-height: 1.65;
+      max-width: 300px;
+      opacity: 0.8;
+    }
+    .trend-icon-big {
+      position: absolute;
+      top: 40px;
+      right: 44px;
+      font-size: 4.5rem;
+      opacity: 0.15;
+    }
+
+    .tc-1 .trend-eyebrow,
+    .tc-1 .trend-title,
+    .tc-1 .trend-body { color: white; }
+    .tc-1 .trend-icon-big { color: white; }
+
+    .tc-2 .trend-eyebrow { color: var(--blue); }
+    .tc-2 .trend-title { color: var(--black); }
+    .tc-2 .trend-body { color: #444; }
+    .tc-2 .trend-icon-big { color: var(--black); }
+
+    .tc-3 .trend-eyebrow,
+    .tc-3 .trend-title,
+    .tc-3 .trend-body { color: white; }
+    .tc-3 .trend-icon-big { color: white; }
+
+    /* ── OFFER SECTION (Grand Offre style) ── */
+    .grand-offre {
+      background: var(--cream);
+      padding: 72px 56px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 48px;
+      border-top: 3px solid var(--black);
+    }
+    .go-badge {
+      display: inline-block;
+      background: var(--blue);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      margin-bottom: 20px;
+    }
+    .go-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      line-height: 0.9;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+    .go-highlight {
+      background: var(--blue);
+      color: white;
+      padding: 0 10px 4px;
+    }
+    .go-body {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: #444;
+      max-width: 560px;
+    }
+    .btn-catalogue {
+      background: var(--black);
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 40px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .btn-catalogue:hover { background: var(--blue); }
+
+    /* ── LANG SECTION ── */
+    .lang-section {
+      background: white;
+      border-top: 1px solid #eee;
+      padding: 40px 56px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .lang-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #888;
+    }
+    .lang-btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .lang-btn {
+      border: 1.5px solid #ddd;
+      padding: 7px 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      transition: all 0.2s;
+    }
+    .lang-btn:hover, .lang-btn.active {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+    .lang-sla {
+      margin-left: auto;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      color: white;
+      padding: 64px 56px 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+    .footer-brand .brand-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.6rem;
+      letter-spacing: 3px;
+      color: white;
+    }
+    .footer-brand p {
+      font-size: 0.82rem;
+      color: #666;
+      line-height: 1.7;
+      margin-top: 12px;
+    }
+    footer h4 {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 10px; }
+    footer ul li a {
+      text-decoration: none;
+      color: #bbb;
+      font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+    footer ul li a:hover { color: white; }
+    .footer-bottom {
+      border-top: 1px solid #222;
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      color: #444;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── BACK TO TOP ── */
+    #backToTop {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--blue);
+      color: white;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s, opacity 0.3s, transform 0.2s;
+      opacity: 0.7;
+    }
+    #backToTop:hover { background: var(--black); opacity: 1; transform: translateY(-3px); }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { height: 300px; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .trending { grid-template-columns: 1fr; }
+      .grand-offre { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PROMO BAR -->
+  <div class="promo-bar">
+    <span><i class="fas fa-truck"></i> LIVRAISON OFFERTE DÈS 35€ D'ACHAT</span>
+    <div class="divider"></div>
+    <span><i class="fas fa-bolt"></i> COMMANDES EXPÉDIÉES SOUS 24H</span>
+    <div class="divider"></div>
+    <span><i class="fas fa-undo"></i> RETOUR GRATUIT</span>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-hamburger">
+        <span></span><span></span><span></span>
+      </div>
+      <a href="#" class="nav-logo">TS CLOUD</a>
+      <div class="nav-actions">
+        <a href="#"><i class="fas fa-search"></i></a>
+        <a href="#" class="cart-badge">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="badge">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span>OFFRE D'OUVERTURE</span>
+      <span>•</span>
+      <span>10% SUR TOUT LE SITE</span>
+      <span>•</span>
+      <span>CLOUD INFRASTRUCTURE</span>
+      <span>•</span>
+      <span>CYBERSÉCURITÉ</span>
+      <span>•</span>
+      <span>OFFRE D'OUVERTURE</span>
+      <span>•</span>
+      <span>10% SUR TOUT LE SITE</span>
+      <span>•</span>
+      <span>CLOUD INFRASTRUCTURE</span>
+      <span>•</span>
+      <span>CYBERSÉCURITÉ</span>
+      <span>•</span>
+      <span>OFFRE D'OUVERTURE</span>
+      <span>•</span>
+      <span>10% SUR TOUT LE SITE</span>
+      <span>•</span>
+      <span>CLOUD INFRASTRUCTURE</span>
+      <span>•</span>
+      <span>CYBERSÉCURITÉ</span>
+      <span>•</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">✦ Offre d'ouverture exclusive</div>
+      <h1 class="hero-title">
+        LA GRANDE<br>
+        OFFRE<br>
+        D'OUVERTURE<br>
+        <span class="highlight">-10% SUR TOUT</span>
+      </h1>
+      <p class="hero-body">La première collection TS Cloud est officiellement en ligne. Ne manquez pas le coche : bénéficiez de -10% de bienvenue sur l'ensemble du site. Soyez les premiers à afficher les tendances de demain.</p>
+      <a href="#" class="btn-hero">VOIR LE CATALOGUE</a>
+    </div>
+    <div class="hero-right">
+      <div class="poster-gallery-preview">
+        <div class="poster-card-hero p1">
+          <div class="icon">☁️</div>
+          <div class="label">CLOUD<br>INFRA</div>
+          <div class="sub">IaaS · PaaS</div>
+        </div>
+        <div class="poster-card-hero p2">
+          <div class="icon">🛡️</div>
+          <div class="label">CYBER<br>SEC</div>
+          <div class="sub">Zero Trust</div>
+        </div>
+        <div class="poster-card-hero p3">
+          <div class="icon">⚡</div>
+          <div class="label">SUPRA<br>MK4</div>
+          <div class="sub">Bare Metal</div>
+        </div>
+        <div class="poster-card-hero p4">
+          <div class="icon">🧠</div>
+          <div class="label">AI &<br>DATA</div>
+          <div class="sub">ML · Analytics</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POSTER SCROLL -->
+  <div class="section-head">
+    <h2>☁️ SOLUTIONS & SERVICES</h2>
+    <a href="#">VOIR TOUT →</a>
+  </div>
+  <div class="poster-scroll-wrap">
+    <div class="poster-scroll-row">
+
+      <div class="poster poster-cloud">
+        <div class="poster-inner">
+          <div class="picon"><i class="fas fa-cloud-upload-alt"></i></div>
+          <div class="ptitle">CLOUD INFRA</div>
+          <div class="psub">IaaS · HA Storage</div>
+        </div>
+      </div>
+
+      <div class="poster poster-security">
+        <div class="poster-inner">
+          <div class="picon"><i class="fas fa-shield-alt"></i></div>
+          <div class="ptitle">CYBER<br>SEC</div>
+          <div class="psub">Zero Trust · DDoS</div>
+        </div>
+      </div>
+
+      <div class="poster poster-data">
+        <div class="poster-inner">
+          <div class="picon"><i class="fas fa-chart-line"></i></div>
+          <div class="ptitle">DATA &<br>AI</div>
+          <div class="psub">Analytics · ML</div>
+        </div>
+      </div>
+
+      <div class="poster poster-hosting">
+        <div class="poster-inner">
+          <div class="picon"><i class="fas fa-code-branch"></i></div>
+          <div class="ptitle">WEB HOSTING</div>
+          <div class="psub">React · SpringBoot</div>
+        </div>
+      </div>
+
+      <div class="poster poster-devops">
+        <div class="poster-inner">
+          <div class="picon"><i class="fas fa-cogs"></i></div>
+          <div class="ptitle">DEV<br>OPS</div>
+          <div class="psub">CI/CD · Pipelines</div>
+        </div>
+      </div>
+
+      <div class="poster poster-ai">
+        <div class="poster-inner">
+          <div class="picon"><i class="fas fa-brain"></i></div>
+          <div class="ptitle">AI<br>ENGINE</div>
+          <div class="psub">TensorFlow · H100</div>
+        </div>
+      </div>
+
+      <div class="poster poster-supra">
+        <div class="poster-inner">
+          <div class="picon"><i class="fas fa-tachometer-alt"></i></div>
+          <div class="ptitle">SUPRA<br>MK4</div>
+          <div class="psub">Bare Metal · GPU</div>
+        </div>
+      </div>
+
+      <div class="poster poster-multi">
+        <div class="poster-inner">
+          <div class="picon"><i class="fas fa-cube"></i></div>
+          <div class="ptitle">CTI<br>MULTI</div>
+          <div class="psub">Serverless · API</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-item">
+      <div class="stat-num">99.99%</div>
+      <div class="stat-label">Uptime SLA</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">350+</div>
+      <div class="stat-label">Clients actifs</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">Support technique</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">-35%</div>
+      <div class="stat-label">Coût vs hyperscalers</div>
+    </div>
+  </div>
+
+  <!-- TRENDING -->
+  <div class="section-head" style="padding-top: 56px;">
+    <h2>⭐ TECHNOLOGIES DE POINTE</h2>
+    <a href="#">EXPLORER →</a>
+  </div>
+  <div class="trending">
+    <div class="trend-card tc-1">
+      <i class="fas fa-rocket trend-icon-big"></i>
+      <div class="trend-eyebrow">Migration Cloud · F40 FERRY</div>
+      <div class="trend-title">F40<br>FERRY</div>
+      <div class="trend-body">Plateforme de migration cloud rapide. Transport sécurisé de workloads legacy vers architecture cloud native, downtime minimal.</div>
+    </div>
+    <div class="trend-card tc-2">
+      <i class="fas fa-chart-pie trend-icon-big"></i>
+      <div class="trend-eyebrow">Orchestration · DISCO MODULE</div>
+      <div class="trend-title">DISCO<br>PARIS</div>
+      <div class="trend-body">Orchestration dynamique de conteneurs avec surveillance analytique distribuée. Prometheus + Grafana + Kafka.</div>
+    </div>
+    <div class="trend-card tc-3">
+      <i class="fas fa-leaf trend-icon-big"></i>
+      <div class="trend-eyebrow">Green IT · SUNFLOWER</div>
+      <div class="trend-title">SUNFLOWER<br>GREEN</div>
+      <div class="trend-body">Green cloud computing – infrastructure éco-responsable avec optimisation énergétique et calcul bas carbone.</div>
+    </div>
+  </div>
+
+  <!-- GRAND OFFRE -->
+  <div class="grand-offre">
+    <div>
+      <div class="go-badge">✦ Offre de lancement exclusive</div>
+      <h2 class="go-title">
+        -10% SUR TOUT<br>
+        <span class="go-highlight">CLOUD & INFRA</span>
+      </h2>
+      <p class="go-body">La première collection TS Cloud est officiellement en ligne. Bénéficiez de -10% sur l'ensemble des services cloud, hébergement et cybersécurité. Soyez parmi les premiers à adopter l'infrastructure de demain.</p>
+    </div>
+    <a href="#" class="btn-catalogue"><i class="fas fa-arrow-right"></i> VOIR LE CATALOGUE</a>
+  </div>
+
+  <!-- LANG REGION -->
+  <div class="lang-section">
+    <span class="lang-label"><i class="fas fa-globe"></i> Langues</span>
+    <div class="lang-btns">
+      <a href="#" class="lang-btn active">FR</a>
+      <a href="#" class="lang-btn">EN</a>
+      <a href="#" class="lang-btn">AR</a>
+      <a href="#" class="lang-btn">ES</a>
+      <a href="#" class="lang-btn">PT</a>
+      <a href="#" class="lang-btn">NL</a>
+    </div>
+    <span class="lang-sla"><i class="fas fa-undo-alt"></i> &nbsp;RETOUR GRATUIT · SLA 99.9%</span>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand-name">TS CLOUD</div>
+        <p>Infrastructure & services digitaux nouvelle génération. Livraison offerte dès 35€. Commandes expédiées sous 24h. Digital sovereignty & African hub.</p>
+      </div>
+      <div>
+        <h4>TS Cloud</h4>
+        <ul>
+          <li><a href="#">À propos de TS</a></li>
+          <li><a href="#">Notre catalogue cloud</a></li>
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">Partenaires</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Cloud IaaS</a></li>
+          <li><a href="#">PaaS & Serverless</a></li>
+          <li><a href="#">Cybersécurité</a></li>
+          <li><a href="#">Support 24/7</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ressources</h4>
+        <ul>
+          <li><a href="#">Blog technique</a></li>
+          <li><a href="#">API Reference</a></li>
+          <li><a href="#">Status</a></li>
+          <li><a href="#">Conditions · Confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 TS Cloud Solutions — Tous droits réservés.</span>
+      <span>Inspiré par les architectures cloud nouvelle génération. <i class="fas fa-cloud-moon"></i></span>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <div id="backToTop"><i class="fas fa-arrow-up"></i></div>
+
+  <script>
+    const btn = document.getElementById('backToTop');
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    window.addEventListener('scroll', () => {
+      btn.style.opacity = window.scrollY > 400 ? '1' : '0.5';
+    });
+  </script>
+
+</body>
+</html>
